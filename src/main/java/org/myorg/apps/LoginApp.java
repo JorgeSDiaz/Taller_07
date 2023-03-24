@@ -19,6 +19,7 @@ public class LoginApp {
     ));
     public static void main(String[] args) {
         port(getPort());
+        secure(getKeyPath(), getKeyPwd(), null, null);
         get("/login", ((request, response) -> {
             response.type("text/html");
             return Files.readString(Paths.get("src/main/resources/index.html"));
@@ -31,7 +32,7 @@ public class LoginApp {
             if (users.containsKey(username) && users.get(username).getPassword().equals(generator(password))) {
                 Session session = request.session(true);
                 session.attribute("username", username);
-                trust(getKeyPath(), getKeyPwd());
+                trust(getKeyTrustPath(), getKeyPwd());
                 response.redirect("https://107.23.88.160:4567/hello");
                 return null;
             }
@@ -45,7 +46,11 @@ public class LoginApp {
     }
 
     public static String getKeyPath() {
-        return System.getenv("KEY-PATH") != null ? System.getenv("KEY-PATH") : "certificates/myTrustStore";
+        return System.getenv("KEY-PATH") != null ? System.getenv("KEY-PATH") : "certificates/ecikeystore.p12";
+    }
+
+    public static String getKeyTrustPath() {
+        return System.getenv("KEY-PATH") != null ? System.getenv("KEY-TRUST-PATH") : "certificates/myTrustStore";
     }
 
     public static String getKeyPwd() {
