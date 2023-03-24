@@ -5,12 +5,11 @@ import spark.Session;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.myorg.services.HashGenerator.generator;
-import static org.myorg.services.URLReader.*;
+import static org.myorg.services.URLReader.trust;
 import static spark.Spark.*;
 
 public class LoginApp {
@@ -33,7 +32,7 @@ public class LoginApp {
                 Session session = request.session(true);
                 session.attribute("username", username);
                 trust(getKeyPath(), getKeyPwd());
-                response.redirect("https://localhost:4567/hello");
+                response.redirect("https://107.23.88.160:4567/hello");
                 return null;
             }
 

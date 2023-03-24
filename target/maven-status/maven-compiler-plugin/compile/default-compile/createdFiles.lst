@@ -1,0 +1,6 @@
+org\myorg\apps\BasicApp.class
+org\myorg\apps\LoginApp.class
+org\myorg\models\User.class
+org\myorg\services\HashGenerator.class
+org\myorg\services\URLReader.class
+org\myorg\App.class
